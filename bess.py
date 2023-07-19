@@ -54,9 +54,9 @@ response = requests.post(webhook_url, data=multipart_data, headers=headers)
 
 
 if response.status_code == 200:
-    print('Imagen enviada con éxito a Discord.')
+    print('Imagen enviada con exito a Discord.')
 else:
-    print('Error al enviar la imagen a Discord. Código de estado:', response.status_code)
+    print('Error al enviar la imagen a Discord. Codigo de estado:', response.status_code)
 
 
 time.sleep(2)
